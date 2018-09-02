@@ -1,0 +1,19 @@
+.container-data {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 80px;
+  z-index: 999;
+  background: linear-gradient(to right, #9ea1a1, #bec4c2);
+  display: flex;
+  align-items: center;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  .header {
+    font-size: 23px;
+    color: white;
+    padding-left: 50px;
+    height: 35px;
+  }
+}
