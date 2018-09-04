@@ -1,0 +1,5 @@
+<div mat-dialog-content>{{warningMsg}}</div>
+<div mat-dialog-actions style="margin-top:20px;">
+  <button mat-button id="deleteButton" (click)="dialogRef.close(true)">Delete</button>
+  <button mat-button id="cancelButton" (click)="dialogRef.close(false)" style="margin-left:15px;">Cancel</button>
+</div>

@@ -1,0 +1,18 @@
+<p>Create New Bucket</p>
+<div class="container-fluid create-bucket-container">
+  <div class="row">
+    <div class="form-group">
+      <div class="col-sm-6">
+        <label>Bucket name*</label>
+        <input type="text" class="form-control" id="bucketName" [(ngModel)]="bucketName" ng-required="true">
+      </div>
+      <div class="col-sm-6">
+        <label>Bucket location*</label>
+        <select class="form-control" id="bucketLocation" [(ngModel)]="selectedLocation">
+          <option *ngFor="let loc of locations" [ngValue]="loc">{{loc.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-default" (click)="createBucket()">Create bucket</button>
+</div>

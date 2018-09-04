@@ -1,0 +1,54 @@
+<div class="container-content">
+  <div class="bucket-name">
+    <h3>selectedBucketName</h3>
+  </div>
+  <div class="bucket-list">
+
+    <div class="bucket-tabs">
+      <div class="bucket-tab">Files</div>
+      <div class="bucket-tab bucket-tab-inactive" [routerLink]="['/bucket-details']">Details</div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6" style="padding-top:10px;">
+          All Files (allFilesLength)
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-default" [disabled]="!deleteEnabled" style="float:right;width:100%;" (click)="deleteFile()">
+            Delete object
+          </button>
+        </div>
+        <div class="col-sm-3">
+          <input type="file" id="fileLoader" #fileInput name="files" title="loadFile" style="display:none" (change)="upload($event.target.files)"
+          />
+          <button class="btn btn-default" id="addButton" style="float:right;width:100%;" (click)="fileInput.click()">
+            Upload Object
+          </button>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table table-hover">
+            <thead class="thead-inverse">
+              <tr>
+                <th class="col-sm-4" style="width:80%">Name</th>
+                <th class="col-sm-5">Last modified</th>
+                <th class="col-sm-3">Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let file of files;let i = index" (click)="selectFile(file,i)" [class.active]="i == selectedRow">
+                <td><i class="fa fa-file" style="padding-right:10px"></i>{{file.name}}</td>
+                <td>{{file.last_modified}}</td>
+                <td>{{file.size}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

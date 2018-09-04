@@ -1,13 +1,18 @@
-.container-content {
-  background-color: #e2e6eb;
-  position: absolute;
-  top: 80px;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  .inputx {
-    height: 50px;
-    width: 200px;
-    margin-left: 50px;
+@import '../../../assets/css/_variables.scss';
+.bucket-list {
+  @include divs-shadow();
+
+  .container-fluid {
+    border-top-left-radius: 5px;
+    .row {
+      .col-sm-10 {
+        padding-top: 10px;
+      }
+      .col-sm-2 {
+        button {
+          float: right;
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,41 @@
+<div class="container-content">
+  <div class="bucket-name">
+    <h3>selectedBucketName</h3>
+  </div>
+  <div class="bucket-list">
+
+    <div class="bucket-tabs" style="width:100%;">
+      <div class="bucket-tab bucket-tab-inactive" [routerLink]="['/bucket-files-list']">Files</div>
+      <div class="bucket-tab">Details</div>
+      <button type="button" class="btn btn-danger" style="float:right;" (click)="deleteDialog()">Delete Object</button>
+    </div>
+
+
+    <div class="container-fluid">
+      <div class="form-group row">
+        <div class="col-sm-2">
+          <label>Bucket name:</label>
+        </div>
+        <div class="col-sm-2">
+          <label>selectedbucketName</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2">
+          <label>Location:</label>
+        </div>
+        <div class="col-sm-2">
+          <label>selectedBucketLocationName</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2">
+          <label>Storage size:</label>
+        </div>
+        <div class="col-sm-2">
+          <label>allFilesSize</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

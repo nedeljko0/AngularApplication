@@ -1,3 +1,5 @@
+@import '../../../assets/css/_variables.scss';
+
 .container-data {
   position: absolute;
   left: 0;
@@ -10,6 +12,7 @@
   align-items: center;
   font-family: 'Open Sans';
   font-weight: bold;
+  @include header-shadow();
   .header {
     font-size: 23px;
     color: white;

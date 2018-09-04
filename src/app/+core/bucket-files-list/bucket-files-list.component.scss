@@ -1,0 +1,15 @@
+.bucket-name {
+  padding: 0 0 40px 0;
+
+  .col-sm-4 {
+    width: 70%;
+  }
+  .selected-file {
+    background-color: red;
+  }
+}
+
+.table tr.active td {
+  background-color: #123456 !important;
+  color: white;
+}

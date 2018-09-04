@@ -4,8 +4,14 @@
   left: 0;
   right: 0;
 }
+.loading {
+  position: relative;
+  top: 80px;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
 .content {
-  position: absolute;
   top: 80px;
   left: 0;
   right: 0;

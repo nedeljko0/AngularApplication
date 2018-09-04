@@ -1,2 +1,110 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import './assets/css/_variables.scss';
+
+/******************
+
+1. Tables
+2. Buttons
+3. Shared
+
+******************/
+
+body {
+  background-color: #e1e1e1;
+  font-family: 'Open Sans';
+}
+
+.row {
+  margin-bottom: 16px;
+}
+
+.container-content {
+  width: 50%;
+  margin: 150px auto;
+}
+
+.container-fluid {
+  background-color: white;
+  margin-right: 40px;
+  min-height: 220px;
+  padding-top: 20px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  @include divs-shadow();
+  border-top-left-radius: 0px;
+}
+
+/* 1. Tables */
+
+td:hover {
+  cursor: pointer;
+}
+
+thead {
+  background-color: lightgray;
+}
+
+tbody,
+thead {
+  border: 1px solid grey;
+}
+
+.table > tbody > tr > td {
+  border-top: none;
+}
+
+.table > thead > tr > th {
+  border-bottom: none;
+  border-top: none;
+}
+
+/* 2. Buttons */
+
+.btn:focus,
+.btn:active {
+  outline: none;
+  box-shadow: none;
+  border-color: #ccc;
+}
+
+.btn-default {
+  background-color: rgb(135, 184, 240) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 9px 19px rgba(0, 0, 0, 0.08) !important;
+  @include divs-shadow();
+  color: white;
+}
+
+/* 3. Shared */
+
+.bucket-tab {
+  display: inline-block;
+  height: 40px;
+  background-color: #fff;
+  min-width: 80px;
+  text-align: center;
+  margin: 0px;
+  padding-top: 10px;
+}
+
+.bucket-tab-inactive {
+  background-color: grey;
+  color: white;
+}
+
+.bucket-tab-inactive:hover {
+  cursor: pointer;
+}
+
+.bucket-tabs {
+  margin-right: 40px;
+}
+
+a,
+a:hover,
+a:visited,
+a:focus {
+  text-decoration: none;
+  color: inherit;
+}

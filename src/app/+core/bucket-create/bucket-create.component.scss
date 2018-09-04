@@ -1,0 +1,15 @@
+@import '../../../assets/css/_variables.scss';
+.create-bucket-container {
+  margin-bottom: 15px;
+  min-height: 175px;
+  @include divs-shadow();
+
+  .form-group {
+    width: 100%;
+    display: flex;
+  }
+}
+
+.container-fluid {
+  border-top-left-radius: 5px;
+}
