@@ -9,9 +9,9 @@
 
 
     <div class="container-fluid">
-      <div class="row" (click)="test()">
-        <div class="col-sm-10">
-          All buckets ({{allBucketsCounter}})
+      <div class="row">
+        <div class="col-sm-10" (click)="test()">
+          All buckets ({{bucketListService.buckets.length}})
         </div>
         <div class="col-sm-2">
           <button type="button" class="btn btn-default" *ngIf="visibleButton" (click)="createBucket()">Create new bucket</button>
@@ -27,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let bucket of bucketList" [routerLink]="['/bucket-files-list']">
+              <tr *ngFor="let bucket of bucketListService.buckets" [routerLink]="['/bucket-files-list']">
                 <td>{{bucket.name}}</td>
                 <td>{{bucket.location.name}}</td>
               </tr>

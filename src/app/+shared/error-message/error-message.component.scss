@@ -1,0 +1,18 @@
+@import '../../../assets/css/_variables.scss';
+.error-container {
+  position: absolute;
+  top: 100px;
+  z-index: 5;
+  width: 50%;
+  left: 25%;
+  border-radius: 5px;
+  background-color: rgb(231, 112, 112);
+  @include divs-shadow();
+  color: white;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 13px;
+  font-weight: bold;
+}

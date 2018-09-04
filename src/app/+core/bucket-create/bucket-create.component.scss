@@ -4,9 +4,15 @@
   min-height: 175px;
   @include divs-shadow();
 
-  .form-group {
+  form {
     width: 100%;
-    display: flex;
+    .form-group {
+      width: 100%;
+      display: flex;
+    }
+    button {
+      margin: 0 0 0 15px;
+    }
   }
 }
 

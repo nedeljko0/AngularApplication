@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { HttpService } from '../-services/http.service';
+import { BucketListService } from '../-services/bucket-list.service';
 
 @Component({
   selector: 'app-bucket-list',
@@ -12,6 +14,18 @@ export class BucketListComponent implements OnInit {
 
   createNewBucket = false;
   visibleButton = true;
+
+  constructor(
+    private loadingBar: SlimLoadingBarService,
+    private http: HttpService,
+    private bucketListService: BucketListService
+  ) {}
+
+  ngOnInit() {
+    this.bucketListService.getLocations();
+    this.bucketListService.getBuckets();
+  }
+
   createBucket() {
     this.createNewBucket = true;
     this.visibleButton = false;
@@ -22,8 +36,8 @@ export class BucketListComponent implements OnInit {
     this.visibleButton = true;
   }
 
-  test(){
-    this.loadingBar.start()
+  test() {
+    //this.loadingBar.start()
   }
 
   bucketList = [
@@ -46,9 +60,4 @@ export class BucketListComponent implements OnInit {
       }
     }
   ];
-  constructor(
-    private loadingBar: SlimLoadingBarService
-  ) {}
-
-  ngOnInit() {}
 }
