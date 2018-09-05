@@ -19,11 +19,17 @@ export class BucketListService {
   ) {}
 
   getLocations() {
+    this.loadingBar.start();
     this.http.getLocations().subscribe(
       (response: Locations) => {
         this.locations = response.locations;
+        this.loadingBar.complete();
       },
       (error: ErrorMessage) => {
+        const tryAgain = this.throwError.tryAgain(
+          this.throwError.tryAgainLimit
+        );
+        if (tryAgain) this.getLocations();
         this.http.handleError(error.message);
       }
     );
@@ -37,7 +43,10 @@ export class BucketListService {
         this.loadingBar.complete();
       },
       (error: ErrorMessage) => {
-        this.loadingBar.stop();
+        const tryAgain = this.throwError.tryAgain(
+          this.throwError.tryAgainLimit
+        );
+        if (tryAgain) this.getBuckets();
         this.http.handleError(error.message);
       }
     );

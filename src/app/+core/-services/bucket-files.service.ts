@@ -23,11 +23,17 @@ export class BucketFilesService {
   ) {}
 
   getBucket(id: string) {
+    this.loadingBar.start();
     this.http.getBucketID(id).subscribe(
       (response: BucketR) => {
         this.bucket = response.bucket;
+        this.loadingBar.complete();
       },
       (error: ErrorMessage) => {
+        const tryAgain = this.throwError.tryAgain(
+          this.throwError.tryAgainLimit
+        );
+        if (tryAgain) this.getBucket(id);
         this.throwError.changeMessage(error.message);
       }
     );
@@ -40,12 +46,17 @@ export class BucketFilesService {
         this.loadingBar.complete();
       },
       (error: ErrorMessage) => {
+        const tryAgain = this.throwError.tryAgain(
+          this.throwError.tryAgainLimit
+        );
+        if (tryAgain) this.deleteBucket(id);
         this.throwError.changeMessage(error.message);
       }
     );
   }
 
   getFiles(bucketID: string) {
+    this.loadingBar.start();
     this.http.getFiles(bucketID).subscribe(
       (response: Files) => {
         this.files = response.objects;
@@ -53,30 +64,47 @@ export class BucketFilesService {
         for (let file of this.files) {
           this.storageSize += file.size;
         }
+        this.loadingBar.complete();
       },
       (error: ErrorMessage) => {
+        const tryAgain = this.throwError.tryAgain(
+          this.throwError.tryAgainLimit
+        );
+        if (tryAgain) this.getFiles(bucketID);
         this.throwError.changeMessage(error.message);
       }
     );
   }
 
   uploadFile(bucketID, file) {
+    this.loadingBar.start();
     this.http.uploadFile(bucketID, file).subscribe(
       response => {
         this.getFiles(bucketID);
+        this.loadingBar.complete();
       },
       (error: ErrorMessage) => {
+        const tryAgain = this.throwError.tryAgain(
+          this.throwError.tryAgainLimit
+        );
+        if (tryAgain) this.uploadFile(bucketID, file);
         this.throwError.changeMessage(error.message);
       }
     );
   }
 
   deleteFile(bucketID: string, fileID: string) {
+    this.loadingBar.start();
     this.http.deleteFile(bucketID, fileID).subscribe(
       response => {
+        this.loadingBar.complete();
         this.getFiles(bucketID);
       },
       (error: ErrorMessage) => {
+        const tryAgain = this.throwError.tryAgain(
+          this.throwError.tryAgainLimit
+        );
+        if (tryAgain) this.deleteFile(bucketID, fileID);
         this.throwError.changeMessage(error.message);
       }
     );

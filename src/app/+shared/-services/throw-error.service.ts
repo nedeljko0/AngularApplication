@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
   providedIn: 'root'
 })
 export class ThrowErrorService {
+  tryAgainLimit: number = 3;
   constructor() {}
 
   private errorMessage = new BehaviorSubject<string>('');
@@ -13,5 +14,12 @@ export class ThrowErrorService {
 
   changeMessage(message) {
     this.errorMessage.next(message);
+  }
+
+  tryAgain(tryNum: number) {
+    if (tryNum > 0) {
+      tryNum--;
+      return true;
+    }
   }
 }

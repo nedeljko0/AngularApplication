@@ -30,7 +30,12 @@ body {
 }
 
 .container-content {
-  width: 50%;
+  @media screen and (min-width: 1400px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 1400px) {
+    width: 60%;
+  }
   margin: 150px auto;
 }
 
