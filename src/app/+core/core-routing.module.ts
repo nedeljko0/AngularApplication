@@ -8,8 +8,8 @@ import { BucketDetailsComponent } from './bucket-details/bucket-details.componen
 const routes: Routes = [
   { path: '', component: BucketListComponent },
   { path: 'home', component: BucketListComponent },
-  { path: 'bucket-files-list', component: BucketFilesListComponent },
-  { path: 'bucket-details', component: BucketDetailsComponent }
+  { path: 'bucket-files-list/:id', component: BucketFilesListComponent },
+  { path: 'bucket-details/:id', component: BucketDetailsComponent }
 ];
 
 @NgModule({

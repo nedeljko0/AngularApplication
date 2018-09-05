@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { ThrowErrorService } from '../../+shared/-services/throw-error.service';
 import { AuthService } from '../../+shared/-services/auth.service';
 import { Locations } from '../-models/location.model';
-import { Bucket, Buckets } from '../-models/bucket.model';
+import { Bucket, Buckets, BucketR } from '../-models/bucket.model';
+import { Files, File } from '../-models/file.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,20 +47,20 @@ export class HttpService {
     });
   }
 
-  deleteBucket(id) {
-    return this.httpClient.delete(`${this.rootUrl}/buckets/${id}`, {
+  deleteBucket(id): Observable<Bucket> {
+    return this.httpClient.delete<Bucket>(`${this.rootUrl}/buckets/${id}`, {
       headers: this.header
     });
   }
 
-  getBucketID(id) {
-    return this.httpClient.get(`${this.rootUrl}/buckets/${id}`, {
+  getBucketID(id: string): Observable<BucketR> {
+    return this.httpClient.get<BucketR>(`${this.rootUrl}/buckets/${id}`, {
       headers: this.header
     });
   }
 
-  getFiles(id) {
-    return this.httpClient.get(`${this.rootUrl}/buckets/${id}/objects`, {
+  getFiles(id): Observable<Files> {
+    return this.httpClient.get<Files>(`${this.rootUrl}/buckets/${id}/objects`, {
       headers: this.header
     });
   }
@@ -72,8 +73,8 @@ export class HttpService {
     });
   }
 
-  deleteFile(bucket, id) {
-    return this.httpClient.delete(
+  deleteFile(bucket, id): Observable<File> {
+    return this.httpClient.delete<File>(
       `${this.rootUrl}/buckets/${bucket}/objects/${id}`,
       {
         headers: this.header

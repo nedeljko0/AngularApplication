@@ -9,3 +9,7 @@ export interface Bucket {
 export interface Buckets {
   buckets: [Bucket];
 }
+
+export interface BucketR {
+  bucket: Bucket;
+}

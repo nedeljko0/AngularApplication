@@ -7,7 +7,8 @@
   top: 0;
   height: 80px;
   z-index: 999;
-  background: linear-gradient(to right, #9ea1a1, #bec4c2);
+  // background: linear-gradient(to right, #9ea1a1, #bec4c2);
+  background: linear-gradient(to right, #aaabac, #d7e7ec, #ffffff);
   display: flex;
   align-items: center;
   font-family: 'Open Sans';
@@ -16,7 +17,8 @@
   .header {
     font-size: 23px;
     color: white;
-    padding-left: 50px;
+    margin-left: 50px;
     height: 35px;
+    text-shadow: 2px 2px 20px white;
   }
 }

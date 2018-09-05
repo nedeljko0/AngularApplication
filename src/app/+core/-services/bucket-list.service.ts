@@ -4,6 +4,7 @@ import { Location, Locations } from '../-models/location.model';
 import { Buckets, Bucket } from '../-models/bucket.model';
 import { ThrowErrorService } from '../../+shared/-services/throw-error.service';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { ErrorMessage } from '../-models/error.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class BucketListService {
       (response: Locations) => {
         this.locations = response.locations;
       },
-      error => {
-        this.http.handleError(error);
+      (error: ErrorMessage) => {
+        this.http.handleError(error.message);
       }
     );
   }
@@ -35,9 +36,9 @@ export class BucketListService {
         this.buckets = response.buckets;
         this.loadingBar.complete();
       },
-      error => {
+      (error: ErrorMessage) => {
         this.loadingBar.stop();
-        this.http.handleError(error);
+        this.http.handleError(error.message);
       }
     );
   }

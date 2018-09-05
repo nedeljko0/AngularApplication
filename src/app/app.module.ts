@@ -12,6 +12,7 @@ import { DeleteConfirmComponent } from './+shared/-modals/delete-confirm/delete-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import { ClickOutsideModule } from 'ng-click-outside';
 import { ErrorMessageComponent } from './+shared/error-message/error-message.component';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ErrorMessageComponent } from './+shared/error-message/error-message.com
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    ClickOutsideModule,
     SlimLoadingBarModule.forRoot()
   ],
   providers: [],

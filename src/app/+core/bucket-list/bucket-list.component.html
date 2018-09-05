@@ -4,7 +4,7 @@
     <app-bucket-create (create)="newBucketCreated($event)"></app-bucket-create>
   </div>
 
-  <h3>Bucket List</h3>
+  <h3 class="header-text">Bucket List</h3>
   <div class="bucket-list">
 
 
@@ -27,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let bucket of bucketListService.buckets" [routerLink]="['/bucket-files-list']">
+              <tr *ngFor="let bucket of bucketListService.buckets" [routerLink]="['/bucket-files-list/',bucket.id]">
                 <td>{{bucket.name}}</td>
                 <td>{{bucket.location.name}}</td>
               </tr>

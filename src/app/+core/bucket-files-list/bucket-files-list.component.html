@@ -1,18 +1,18 @@
 <div class="container-content">
-  <div class="bucket-name">
-    <h3>selectedBucketName</h3>
+  <div class="bucket-name" class="header-text">
+    <h3>{{bucketService.bucket.name}}</h3>
   </div>
   <div class="bucket-list">
 
     <div class="bucket-tabs">
       <div class="bucket-tab">Files</div>
-      <div class="bucket-tab bucket-tab-inactive" [routerLink]="['/bucket-details']">Details</div>
+      <div class="bucket-tab bucket-tab-inactive" [routerLink]="['/bucket-details/',bucketID]">Details</div>
     </div>
 
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6" style="padding-top:10px;">
-          All Files (allFilesLength)
+          All Files ({{bucketService.files.length}})
         </div>
         <div class="col-sm-3">
           <button class="btn btn-default" [disabled]="!deleteEnabled" style="float:right;width:100%;" (click)="deleteFile()">
@@ -39,10 +39,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let file of files;let i = index" (click)="selectFile(file,i)" [class.active]="i == selectedRow">
+              <tr *ngFor="let file of bucketService.files;let i = index" (click)="selectFile(file,i)" [class.active]="i == selectedRow">
                 <td><i class="fa fa-file" style="padding-right:10px"></i>{{file.name}}</td>
-                <td>{{file.last_modified}}</td>
-                <td>{{file.size}}</td>
+                <td>{{file.last_modified | date:'dd.MM.yyyy'}}</td>
+                <td>{{file.size | bytes}}</td>
               </tr>
             </tbody>
           </table>

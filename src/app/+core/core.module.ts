@@ -7,6 +7,8 @@ import { BucketFilesListComponent } from './bucket-files-list/bucket-files-list.
 import { BucketDetailsComponent } from './bucket-details/bucket-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { ClickOutsideModule } from 'ng-click-outside';
+import { BytesPipe } from '../+shared/-pipes/bytes.pipe';
 
 @NgModule({
   imports: [
@@ -15,13 +17,15 @@ import { MatDialogModule, MatButtonModule } from '@angular/material';
     ReactiveFormsModule,
     CommonModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    ClickOutsideModule
   ],
   declarations: [
     BucketListComponent,
     BucketCreateComponent,
     BucketFilesListComponent,
-    BucketDetailsComponent
+    BucketDetailsComponent,
+    BytesPipe
   ],
   providers: []
 })

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DeleteConfirmComponent } from '../../+shared/-modals/delete-confirm/delete-confirm.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BucketFilesService } from '../-services/bucket-files.service';
 
 @Component({
   selector: 'app-bucket-details',
@@ -9,10 +11,20 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 })
 export class BucketDetailsComponent implements OnInit {
   delete: MatDialogRef<DeleteConfirmComponent>;
+  bucketID: string;
+  constructor(
+    private dialog: MatDialog,
+    private bucketService: BucketFilesService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.bucketID = this.route.snapshot.params['id'];
+  }
 
-  constructor(private dialog: MatDialog) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.bucketService.getBucket(this.bucketID);
+    this.bucketService.getFiles(this.bucketID);
+  }
 
   deleteDialog() {
     this.delete = this.dialog.open(DeleteConfirmComponent, {
@@ -25,7 +37,11 @@ export class BucketDetailsComponent implements OnInit {
     });
 
     this.delete.afterClosed().subscribe(res => {
-      console.log('DELETE?' + res);
+      if (res) {
+        this.bucketService.deleteBucket(this.bucketID);
+
+        this.router.navigateByUrl('/home');
+      }
     });
   }
 }

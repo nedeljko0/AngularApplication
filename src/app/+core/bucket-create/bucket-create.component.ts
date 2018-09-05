@@ -54,4 +54,13 @@ export class BucketCreateComponent implements OnInit {
       }
     );
   }
+
+  clicked = 0;
+  onClickedOutside(event: Event) {
+    this.clicked++;
+    if (this.clicked > 1) {
+      this.create.emit(true);
+      this.clicked = 0;
+    }
+  }
 }

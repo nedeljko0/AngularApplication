@@ -1,6 +1,5 @@
-<p>Create New Bucket</p>
-<div class="container-fluid create-bucket-container">
-
+<p class="header-text">Create New Bucket</p>
+<div class="container-fluid create-bucket-container" (clickOutside)="onClickedOutside($event)">
   <div class="row">
     <form #f="ngForm" (ngSubmit)="createBucket(f)">
       <div class="form-group">
@@ -19,6 +18,4 @@
       <button class="btn btn-default" [disabled]="!f.valid" type="submit">Create bucket</button>
     </form>
   </div>
-
-
 </div>

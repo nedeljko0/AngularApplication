@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DeleteConfirmComponent } from '../../+shared/-modals/delete-confirm/delete-confirm.component';
+import { BucketFilesService } from '../-services/bucket-files.service';
+import { FileL } from '../-models/file.model';
 
 @Component({
   selector: 'app-bucket-files-list',
@@ -9,34 +12,38 @@ import { DeleteConfirmComponent } from '../../+shared/-modals/delete-confirm/del
 })
 export class BucketFilesListComponent implements OnInit {
   delete: MatDialogRef<DeleteConfirmComponent>;
-  deleteEnabled = false;
+  deleteEnabled: boolean = false;
   selectedRow: number;
-  files = [
-    {
-      name: 'filename1',
-      last_modified: '13.06.1999',
-      size: '56KB'
-    },
-    {
-      name: 'filename2',
-      last_modified: '13.06.1999',
-      size: '56KB'
-    },
-    {
-      name: 'filename3',
-      last_modified: '13.06.1999',
-      size: '56KB'
-    }
-  ];
+  bucketID: string;
+  showName: boolean = false;
+  file: FileL;
+
+  constructor(
+    private dialog: MatDialog,
+    private bucketService: BucketFilesService,
+    public route: ActivatedRoute
+  ) {
+    this.bucketID = this.route.snapshot.params['id'];
+  }
+
+  ngOnInit() {
+    this.bucketService.getBucket(this.bucketID);
+    this.bucketService.getFiles(this.bucketID);
+  }
 
   selectFile(file, i) {
+    this.file = file;
     this.selectedRow = i;
     this.deleteEnabled = true;
   }
 
-  constructor(private dialog: MatDialog) {}
-
-  ngOnInit() {}
+  upload(files: File[]) {
+    let formData = new FormData();
+    Array.from(files).forEach(f => {
+      formData.append('file', f);
+    });
+    this.bucketService.uploadFile(this.bucketID, formData);
+  }
 
   deleteFile() {
     this.delete = this.dialog.open(DeleteConfirmComponent, {
@@ -48,8 +55,12 @@ export class BucketFilesListComponent implements OnInit {
       }
     });
 
-    this.delete.afterClosed().subscribe(res => {
-      console.log('DELETE?' + res);
+    this.delete.afterClosed().subscribe((response: boolean) => {
+      if (response) {
+        this.bucketService.deleteFile(this.bucketID, this.file.name);
+        this.selectedRow = null;
+        this.deleteEnabled = false;
+      }
     });
   }
 }
