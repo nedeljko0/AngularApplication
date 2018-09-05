@@ -25,12 +25,13 @@ export class BucketListService {
         this.locations = response.locations;
         this.loadingBar.complete();
       },
-      (error: ErrorMessage) => {
+      (error:ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
-          this.throwError.tryAgainLimit
+          this.throwError.tryAgainLimit,
+          error.status
         );
         if (tryAgain) this.getLocations();
-        this.http.handleError(error.message);
+        this.http.handleError(error.error.message);
       }
     );
   }
@@ -42,12 +43,13 @@ export class BucketListService {
         this.buckets = response.buckets;
         this.loadingBar.complete();
       },
-      (error: ErrorMessage) => {
+      (error:ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
-          this.throwError.tryAgainLimit
+          this.throwError.tryAgainLimit,
+          error.status
         );
         if (tryAgain) this.getBuckets();
-        this.http.handleError(error.message);
+        this.http.handleError(error.error.message);
       }
     );
   }

@@ -69,7 +69,9 @@ export class HttpService {
     this.header.append('Accept', 'application/json');
 
     return this.httpClient.post(`${this.rootUrl}/buckets/${id}/objects`, file, {
-      headers: this.header
+      headers: this.header,
+      reportProgress: true,
+      observe: 'events'
     });
   }
 

@@ -22,8 +22,8 @@
         <div class="col-sm-3">
           <input type="file" id="fileLoader" #fileInput name="files" title="loadFile" style="display:none" (change)="upload($event.target.files)"
           />
-          <button class="btn btn-default" id="addButton" style="float:right;width:100%;" (click)="fileInput.click()">
-            Upload Object
+          <button [disabled]="startupload" class="btn btn-default" id="addButton" style="float:right;width:100%;" (click)="fileInput.click()">
+            {{startupload ? percentDone + '%' : 'Upload Object'}}
           </button>
         </div>
 

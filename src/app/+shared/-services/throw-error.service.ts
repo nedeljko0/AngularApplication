@@ -16,8 +16,8 @@ export class ThrowErrorService {
     this.errorMessage.next(message);
   }
 
-  tryAgain(tryNum: number) {
-    if (tryNum > 0) {
+  tryAgain(tryNum: number, status) {
+    if (tryNum > 0 && status === 500) {
       tryNum--;
       return true;
     }

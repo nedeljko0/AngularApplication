@@ -29,12 +29,13 @@ export class BucketFilesService {
         this.bucket = response.bucket;
         this.loadingBar.complete();
       },
-      (error: ErrorMessage) => {
+      (error:ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
-          this.throwError.tryAgainLimit
+          this.throwError.tryAgainLimit,
+          error.status
         );
         if (tryAgain) this.getBucket(id);
-        this.throwError.changeMessage(error.message);
+        this.throwError.changeMessage(error.error.message);
       }
     );
   }
@@ -45,12 +46,13 @@ export class BucketFilesService {
       response => {
         this.loadingBar.complete();
       },
-      (error: ErrorMessage) => {
+      (error:ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
-          this.throwError.tryAgainLimit
+          this.throwError.tryAgainLimit,
+          error.status
         );
         if (tryAgain) this.deleteBucket(id);
-        this.throwError.changeMessage(error.message);
+        this.throwError.changeMessage(error.error.message);
       }
     );
   }
@@ -66,29 +68,13 @@ export class BucketFilesService {
         }
         this.loadingBar.complete();
       },
-      (error: ErrorMessage) => {
+      (error:ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
-          this.throwError.tryAgainLimit
+          this.throwError.tryAgainLimit,
+          error.status
         );
         if (tryAgain) this.getFiles(bucketID);
-        this.throwError.changeMessage(error.message);
-      }
-    );
-  }
-
-  uploadFile(bucketID, file) {
-    this.loadingBar.start();
-    this.http.uploadFile(bucketID, file).subscribe(
-      response => {
-        this.getFiles(bucketID);
-        this.loadingBar.complete();
-      },
-      (error: ErrorMessage) => {
-        const tryAgain = this.throwError.tryAgain(
-          this.throwError.tryAgainLimit
-        );
-        if (tryAgain) this.uploadFile(bucketID, file);
-        this.throwError.changeMessage(error.message);
+        this.throwError.changeMessage(error.error.message);
       }
     );
   }
@@ -100,12 +86,13 @@ export class BucketFilesService {
         this.loadingBar.complete();
         this.getFiles(bucketID);
       },
-      (error: ErrorMessage) => {
+      (error:ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
-          this.throwError.tryAgainLimit
+          this.throwError.tryAgainLimit,
+          error.status
         );
         if (tryAgain) this.deleteFile(bucketID, fileID);
-        this.throwError.changeMessage(error.message);
+        this.throwError.changeMessage(error.error.message);
       }
     );
   }
