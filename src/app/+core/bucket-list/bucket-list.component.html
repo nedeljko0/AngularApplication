@@ -10,16 +10,17 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-10" (click)="test()">
-          All buckets ({{bucketListService.buckets.length}})
+        <div class="col-sm-10">
+          All buckets ({{bucketListService.bucketsLoaded?bucketListService.buckets.length:''}})
         </div>
         <div class="col-sm-2">
-          <button type="button" class="btn btn-default" *ngIf="visibleButton" (click)="createBucket()">Create new bucket</button>
+          <button type="button" class="createBucket" id="createBucket" class="btn btn-default" *ngIf="visibleButton" (click)="createBucket()">Create
+            new bucket</button>
         </div>
       </div>
-      <div class="row">
+      <div class="row bucket-list">
         <div class="col-sm-12">
-          <table class="table table-hover">
+          <table class="table table-hover" *ngIf="bucketListService.bucketsLoaded">
             <thead class="thead-inverse">
               <tr>
                 <th class="col-sm-6">Name</th>
@@ -27,8 +28,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let bucket of bucketListService.buckets" [routerLink]="['/bucket-files-list/',bucket.id]">
-                <td>{{bucket.name}}</td>
+              <tr id="test" *ngFor="let bucket of bucketListService.buckets" [routerLink]="['/bucket-files-list/',bucket.id]">
+                <td>
+                  <div id="bucketname" class="bucketname">{{bucket.name}}</div>
+                </td>
                 <td>{{bucket.location.name}}</td>
               </tr>
             </tbody>

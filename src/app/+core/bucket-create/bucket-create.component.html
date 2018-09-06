@@ -1,7 +1,7 @@
 <p class="header-text">Create New Bucket</p>
 <div class="container-fluid create-bucket-container" (clickOutside)="onClickedOutside($event)">
   <div class="row">
-    <form #f="ngForm" (ngSubmit)="createBucket(f)">
+    <form id="form" class="form" #f="ngForm" (ngSubmit)="createBucket(f)">
       <div class="form-group">
         <div class="col-sm-6">
           <label>Bucket name*</label>

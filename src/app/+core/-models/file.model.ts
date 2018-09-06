@@ -6,8 +6,8 @@ export interface File {
 
 export interface FileL {
   name: string;
-  modified: string;
   size: number;
+  last_modified: string;
 }
 
 export interface Files {

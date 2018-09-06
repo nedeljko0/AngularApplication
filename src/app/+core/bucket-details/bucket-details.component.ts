@@ -12,10 +12,11 @@ import { BucketFilesService } from '../-services/bucket-files.service';
 export class BucketDetailsComponent implements OnInit {
   delete: MatDialogRef<DeleteConfirmComponent>;
   bucketID: string;
+  gotBucket: boolean = false;
   constructor(
     private dialog: MatDialog,
-    private bucketService: BucketFilesService,
-    private route: ActivatedRoute,
+    public bucketService: BucketFilesService,
+    public route: ActivatedRoute,
     private router: Router
   ) {
     this.bucketID = this.route.snapshot.params['id'];

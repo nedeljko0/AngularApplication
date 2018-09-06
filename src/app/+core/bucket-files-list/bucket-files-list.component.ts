@@ -22,12 +22,12 @@ export class BucketFilesListComponent implements OnInit {
   bucketID: string;
   showName: boolean = false;
   file: FileL;
-  percentDone: number;
+  percentDone: number = 0;
   startupload: boolean = false;
 
   constructor(
     private dialog: MatDialog,
-    private bucketService: BucketFilesService,
+    public bucketService: BucketFilesService,
     public route: ActivatedRoute,
     private http: HttpService,
     private throwError: ThrowErrorService,
@@ -62,15 +62,12 @@ export class BucketFilesListComponent implements OnInit {
           this.startupload = false;
         }
       },
-      (error:ErrorMessage) => {
+      (error: ErrorMessage) => {
         this.startupload = false;
         this.percentDone = 0;
         let tryAgain = this.throwError.tryAgain(
           this.throwError.tryAgainLimit,
           error.status
-        );
-        console.log(
-          'error: ' + JSON.stringify(error) + ' tryAgain: ' + tryAgain
         );
         if (tryAgain) this.uploadFile(bucketID, file);
         this.throwError.changeMessage(error.error.message);

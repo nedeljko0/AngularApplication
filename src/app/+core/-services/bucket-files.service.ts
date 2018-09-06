@@ -6,8 +6,7 @@ import { ThrowErrorService } from '../../+shared/-services/throw-error.service';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { ErrorMessage } from '../-models/error.model';
 import { Files, File } from '../-models/file.model';
-import { map } from 'rxjs/operators';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +15,8 @@ export class BucketFilesService {
   bucket: Bucket;
   files;
   storageSize: number = 0;
+  bucketLoaded: boolean = false;
+  filesLoaded: boolean = false;
   constructor(
     private http: HttpService,
     private throwError: ThrowErrorService,
@@ -28,14 +29,16 @@ export class BucketFilesService {
       (response: BucketR) => {
         this.bucket = response.bucket;
         this.loadingBar.complete();
+        this.bucketLoaded = true;
       },
-      (error:ErrorMessage) => {
+      (error: ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
           this.throwError.tryAgainLimit,
           error.status
         );
         if (tryAgain) this.getBucket(id);
         this.throwError.changeMessage(error.error.message);
+        this.bucketLoaded = false;
       }
     );
   }
@@ -46,7 +49,7 @@ export class BucketFilesService {
       response => {
         this.loadingBar.complete();
       },
-      (error:ErrorMessage) => {
+      (error: ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
           this.throwError.tryAgainLimit,
           error.status
@@ -67,14 +70,16 @@ export class BucketFilesService {
           this.storageSize += file.size;
         }
         this.loadingBar.complete();
+        this.filesLoaded = true;
       },
-      (error:ErrorMessage) => {
+      (error: ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
           this.throwError.tryAgainLimit,
           error.status
         );
         if (tryAgain) this.getFiles(bucketID);
         this.throwError.changeMessage(error.error.message);
+        this.filesLoaded = false;
       }
     );
   }
@@ -86,7 +91,7 @@ export class BucketFilesService {
         this.loadingBar.complete();
         this.getFiles(bucketID);
       },
-      (error:ErrorMessage) => {
+      (error: ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
           this.throwError.tryAgainLimit,
           error.status

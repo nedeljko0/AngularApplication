@@ -26,7 +26,7 @@ export class BucketCreateComponent implements OnInit {
   locations = [];
 
   constructor(
-    private bucketLService: BucketListService,
+    public bucketLService: BucketListService,
     private http: HttpService,
     private loadingBar: SlimLoadingBarService,
     private throwError: ThrowErrorService

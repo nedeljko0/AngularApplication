@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { BytesPipe } from '../+shared/-pipes/bytes.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -27,6 +28,6 @@ import { BytesPipe } from '../+shared/-pipes/bytes.pipe';
     BucketDetailsComponent,
     BytesPipe
   ],
-  providers: []
+  providers: [MatDialogModule, MatButtonModule, HttpClientModule]
 })
 export class CoreModule {}

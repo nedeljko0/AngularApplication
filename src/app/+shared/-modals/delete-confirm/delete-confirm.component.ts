@@ -9,8 +9,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class DeleteConfirmComponent implements OnInit {
   warningMsg: string;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<DeleteConfirmComponent>
+    @Inject(MAT_DIALOG_DATA) protected data: any,
+    public dialogRef: MatDialogRef<DeleteConfirmComponent>
   ) {
     this.warningMsg = this.data.message;
   }

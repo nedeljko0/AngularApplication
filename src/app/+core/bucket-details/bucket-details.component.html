@@ -1,13 +1,13 @@
 <div class="container-content">
   <div class="bucket-name" class="header-text">
-    <h3>{{bucketService.bucket.name}}</h3>
+    <h3>{{bucketService.bucketLoaded?bucketService.bucket.name:''}}</h3>
   </div>
   <div class="bucket-list">
 
     <div class="bucket-tabs" style="width:100%;">
       <div class="bucket-tab bucket-tab-inactive" [routerLink]="['/bucket-files-list/',bucketID]">Files</div>
-      <div class="bucket-tab">Details</div>
-      <button type="button" class="btn btn-danger" style="float:right;" (click)="deleteDialog()">Delete Object</button>
+      <div class="bucket-tab active-tab">Details</div>
+      <button type="button" id="dangerBtn" class="btn btn-danger" style="float:right;" (click)="deleteDialog()">Delete Object</button>
     </div>
 
 
@@ -17,7 +17,7 @@
           <label>Bucket name:</label>
         </div>
         <div class="col-sm-2">
-          <label>{{bucketService.bucket.name}}</label>
+          <label>{{bucketService.bucketLoaded?bucketService.bucket.name:'' }}</label>
         </div>
       </div>
       <div class="form-group row">
@@ -25,14 +25,14 @@
           <label>Location:</label>
         </div>
         <div class="col-sm-2">
-          <label>{{bucketService.bucket.location.name}}</label>
+          <label>{{bucketService.bucketLoaded?bucketService.bucket.location.name:'' }}</label>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-sm-2">
           <label>Storage size:</label>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2" *ngIf="bucketService.filesLoaded">
           <label>{{bucketService.storageSize | bytes}}</label>
         </div>
       </div>

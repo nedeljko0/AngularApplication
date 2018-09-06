@@ -22,14 +22,14 @@ export class HttpService {
     private authService: AuthService
   ) {}
 
-  getLocations(): Observable<Locations> {
-    return this.httpClient.get<Locations>(`${this.rootUrl}/locations`, {
+  getLocations() {
+    return this.httpClient.get(`${this.rootUrl}/locations`, {
       headers: this.header
     });
   }
 
-  getBuckets(): Observable<Buckets> {
-    return this.httpClient.get<Buckets>(`${this.rootUrl}/buckets`, {
+  getBuckets() {
+    return this.httpClient.get(`${this.rootUrl}/buckets`, {
       headers: this.header
     });
   }
@@ -47,20 +47,20 @@ export class HttpService {
     });
   }
 
-  deleteBucket(id): Observable<Bucket> {
-    return this.httpClient.delete<Bucket>(`${this.rootUrl}/buckets/${id}`, {
+  deleteBucket(id) {
+    return this.httpClient.delete(`${this.rootUrl}/buckets/${id}`, {
       headers: this.header
     });
   }
 
-  getBucketID(id: string): Observable<BucketR> {
-    return this.httpClient.get<BucketR>(`${this.rootUrl}/buckets/${id}`, {
+  getBucketID(id: string) {
+    return this.httpClient.get(`${this.rootUrl}/buckets/${id}`, {
       headers: this.header
     });
   }
 
-  getFiles(id): Observable<Files> {
-    return this.httpClient.get<Files>(`${this.rootUrl}/buckets/${id}/objects`, {
+  getFiles(id) {
+    return this.httpClient.get(`${this.rootUrl}/buckets/${id}/objects`, {
       headers: this.header
     });
   }
@@ -75,8 +75,8 @@ export class HttpService {
     });
   }
 
-  deleteFile(bucket, id): Observable<File> {
-    return this.httpClient.delete<File>(
+  deleteFile(bucket, id) {
+    return this.httpClient.delete(
       `${this.rootUrl}/buckets/${bucket}/objects/${id}`,
       {
         headers: this.header

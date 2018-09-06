@@ -12,6 +12,8 @@ import { ErrorMessage } from '../-models/error.model';
 export class BucketListService {
   locations = [];
   buckets = [];
+  locationsLoaded: boolean = false;
+  bucketsLoaded: boolean = false;
   constructor(
     private http: HttpService,
     private throwError: ThrowErrorService,
@@ -24,14 +26,17 @@ export class BucketListService {
       (response: Locations) => {
         this.locations = response.locations;
         this.loadingBar.complete();
+        this.locationsLoaded = true;
       },
-      (error:ErrorMessage) => {
+      (error: ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
           this.throwError.tryAgainLimit,
           error.status
         );
         if (tryAgain) this.getLocations();
-        this.http.handleError(error.error.message);
+        if (typeof error.error.message !== 'undefined')
+          this.http.handleError(error.error.message);
+        this.locationsLoaded = false;
       }
     );
   }
@@ -42,14 +47,17 @@ export class BucketListService {
       (response: Buckets) => {
         this.buckets = response.buckets;
         this.loadingBar.complete();
+        this.bucketsLoaded = true;
       },
-      (error:ErrorMessage) => {
+      (error: ErrorMessage) => {
         const tryAgain = this.throwError.tryAgain(
           this.throwError.tryAgainLimit,
           error.status
         );
         if (tryAgain) this.getBuckets();
-        this.http.handleError(error.error.message);
+        if (typeof error.error.message !== 'undefined')
+          this.http.handleError(error.error.message);
+        this.bucketsLoaded = false;
       }
     );
   }
